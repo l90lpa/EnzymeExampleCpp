@@ -1,3 +1,4 @@
+#include "dsquare.h"
 #include "square.h"
 
 #include <stdio.h>
