@@ -1,6 +1,6 @@
 CXX			:= clang
 LD	 		:= ld.lld
-LLDEnzyme 	:= /path/to/LLDEnzyme-15.so
+LLDEnzyme 	:= /usr/local/lib/Enzyme/LLDEnzyme-15.so
 
 CXXFLAGS 	+= -flto -fuse-ld=$(LD) 
 EnzymeNoOpt := -fno-vectorize -fno-slp-vectorize -fno-unroll-loops

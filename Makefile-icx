@@ -1,7 +1,7 @@
 CXX			:= icx
 LLVMLINK	:= llvm-link
 LLVMOPT		:= opt
-LLVMEnzyme	:= /path/to/LLVMEnzyme-15.so
+LLVMEnzyme	:= /usr/local/lib/Enzyme/LLVMEnzyme-15.so
 
 CXXFLAGS	:= -flto
 EnzymeNoOpt	:= -no-vec -unroll=0

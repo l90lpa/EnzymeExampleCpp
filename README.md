@@ -14,7 +14,7 @@ This project gives an example of using the [Enzyme](https://enzyme.mit.edu/) AD 
 
 ## Setup
 - If `clang`, `ld.lld`, `llvm-link`, `opt`, or `icx` aren't in your path then either add them to your path, or put their paths in the appropriate variables in `Makefile`.
-- In `Makefile-icx` modify `/path/to/LLVMEnzyme-15.so` to be the actual path, and in `Makefile-clang` modify `/path/to/LLDEnzyme-15.so` to agian be the actual path.
+- In `Makefile-icx` and `Makefile-clang`, modify respectively the paths `/usr/local/lib/Enzyme/LLVMEnzyme-15.so` to be and `/usr/local/lib/Enzyme/LLDEnzyme-15.so` be actual paths to the libraries.
 
 ## Notes
 - Documentation for building `LLVMEnzyme-15.so`/`LLDEnzyme-15.so` can be found at [here](https://enzyme.mit.edu/Installation/), however the process can be simplified. Instead of building LLVM manually as suggested, simply install the llvm headers/libraries and build against these. The headers/libraries can be installed using `apt install llvm-15-dev` (you might need to first [add the llvm 15 toolchain repository to apt](https://apt.llvm.org/))), and then the required cmake directory can be found using `dpkg -L llvm-15-dev | grep lib/cmake/llvm`, at which point one can then follow the Enzyme build steps.
