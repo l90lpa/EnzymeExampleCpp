@@ -1,0 +1,25 @@
+CXX			:= clang
+LD	 		:= ld.lld
+LLDEnzyme 	:= /path/to/LLDEnzyme-15.so
+
+CXXFLAGS 	+= -flto -fuse-ld=$(LD) 
+EnzymeNoOpt := -fno-vectorize -fno-slp-vectorize -fno-unroll-loops
+LLDFLAGS    += -Wl,--no-lto-legacy-pass-manager,--load-pass-plugin=$(LLDEnzyme),--lto-newpm-passes=enzyme
+#LLDFLAGS	+= -Wl,--mllvm=--load=$(LLDEnzyme)
+
+
+app: main.o square.o dsquare.o
+	@echo "\nCompiling done. Now linking, and AD\n"
+	$(CXX) -O3 $(CXXFLAGS) $(LLDFLAGS) -o app main.o square.o dsquare.o
+
+main.o: main.cpp
+	$(CXX) $(CXXFLAGS) -O2 $(EnzymeNoOpt) -c main.cpp
+
+square.o: square.cpp
+	$(CXX) $(CXXFLAGS) -O2 $(EnzymeNoOpt) -c square.cpp
+
+dsquare.o: dsquare.cpp
+	$(CXX) $(CXXFLAGS) -O2 $(EnzymeNoOpt) -c dsquare.cpp
+
+clean:
+	rm -f main main.o square square.o dsquare dsquare.o app*
