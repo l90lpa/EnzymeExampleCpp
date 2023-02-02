@@ -10,7 +10,7 @@ app: main.o primal.o adjoint.o
 	@echo "\nCompiling done. Now linking, and AD\n"
 	$(LLVMLINK) -v main.o primal.o adjoint.o -o merged.o
 	$(LLVMOPT) merged.o --load=$(LLVMEnzyme) --enable-new-pm=0 -enzyme -o ad.o
-	$(CXX) $(CXXFLAGS) -O3 ad.o -o app
+	$(CXX) $(CXXFLAGS) -Wl,-lstdc++ -O3 ad.o -o app
 
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -O2 $(EnzymeNoOpt) -c main.cpp
