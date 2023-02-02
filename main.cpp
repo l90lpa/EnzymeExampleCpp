@@ -1,5 +1,5 @@
-#include "dsquare.h"
-#include "square.h"
+#include "adjoint.h"
+#include "primal.h"
 
 #include <stdio.h>
 

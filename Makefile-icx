@@ -6,20 +6,20 @@ LLVMEnzyme	:= /usr/local/lib/Enzyme/LLVMEnzyme-15.so
 CXXFLAGS	:= -flto
 EnzymeNoOpt	:= -no-vec -unroll=0
 
-app: main.o square.o dsquare.o
+app: main.o primal.o adjoint.o
 	@echo "\nCompiling done. Now linking, and AD\n"
-	$(LLVMLINK) -v main.o square.o dsquare.o -o merged.o
+	$(LLVMLINK) -v main.o primal.o adjoint.o -o merged.o
 	$(LLVMOPT) merged.o --load=$(LLVMEnzyme) --enable-new-pm=0 -enzyme -o ad.o
 	$(CXX) $(CXXFLAGS) -O3 ad.o -o app
 
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -O2 $(EnzymeNoOpt) -c main.cpp
 
-square.o: square.cpp
-	$(CXX) $(CXXFLAGS) -O2 $(EnzymeNoOpt) -c square.cpp
+primal.o: primal.cpp
+	$(CXX) $(CXXFLAGS) -O2 $(EnzymeNoOpt) -c primal.cpp
 
-dsquare.o: dsquare.cpp
-	$(CXX) $(CXXFLAGS) -O2 $(EnzymeNoOpt) -c dsquare.cpp
+adjoint.o: adjoint.cpp
+	$(CXX) $(CXXFLAGS) -O2 $(EnzymeNoOpt) -c adjoint.cpp
 
 clean:
-	rm -f main main.o ad.o merged.o square square.o dsquare dsquare.o app*
+	rm -f main main.o ad.o merged.o square primal.o dsquare adjoint.o app*
