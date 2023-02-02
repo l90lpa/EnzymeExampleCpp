@@ -1,9 +1,8 @@
 #include "dsquare.h"
 #include "square.h"
 
-extern double __enzyme_autodiff(void*, double);
+extern double __enzyme_autodiff_square(void*, ...);
 
-double dsquare(double x) {
-    // This returns the derivative of square or 2 * x
-    return __enzyme_autodiff((void*) square, x);
+double grad_square(double x) {
+    return __enzyme_autodiff_square((void*)square, x);
 }
